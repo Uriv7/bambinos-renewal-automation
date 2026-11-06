@@ -1,0 +1,14 @@
+{
+  "new_simulated_executions": [
+    "CASE-84902",
+    "CASE-84903",
+    "CASE-84906",
+    "CASE-84908",
+    "CASE-84910",
+    "CASE-84913"
+  ],
+  "skipped_already_executed": [],
+  "llm": "LLM not requested; deterministic templates",
+  "inputs_unchanged": true,
+  "note": "Run-specific facts live here so the other outputs stay byte-reproducible."
+}

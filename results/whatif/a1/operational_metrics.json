@@ -1,0 +1,255 @@
+{
+  "as_of": "2026-11-03 18:00:00",
+  "records": {
+    "invoices": 13,
+    "faculty_forms": 12,
+    "booking_requests": 4,
+    "schedule_rows": 2,
+    "reference_students": 13
+  },
+  "decisions": {
+    "AUTO_APPROVE": 2,
+    "AWAITING_SCHEDULING": 1,
+    "ALREADY_PROCESSED": 1,
+    "EXCEPTION": 9
+  },
+  "form_level_exceptions": 1,
+  "kpis": [
+    {
+      "metric": "Paid invoices",
+      "definition": "Invoices with payment_status = Paid",
+      "numerator": 11,
+      "denominator": 13,
+      "value_pct": 84.6,
+      "calculation_method": "count ratio",
+      "data_source": "1_invoices",
+      "fully_measurable": true,
+      "limitations": "Status field taken at face value; no gateway ledger to cross-check"
+    },
+    {
+      "metric": "Unpaid / not-fully-paid invoices",
+      "definition": "Invoices that are not Paid (Failed + Partially_Paid)",
+      "numerator": 2,
+      "denominator": 13,
+      "value_pct": 15.4,
+      "calculation_method": "count ratio",
+      "data_source": "1_invoices",
+      "fully_measurable": true,
+      "limitations": ""
+    },
+    {
+      "metric": "Orphaned paid invoices",
+      "definition": "Paid invoices with no faculty form linked by exact invoice id",
+      "numerator": 3,
+      "denominator": 11,
+      "value_pct": 27.3,
+      "calculation_method": "count ratio",
+      "data_source": "1_invoices, 2_faculty_form",
+      "fully_measurable": true,
+      "limitations": "Includes 84913 whose form exists but cites a mistyped invoice id"
+    },
+    {
+      "metric": "Faculty form submission rate (paid invoices)",
+      "definition": "Paid invoices with an exact-id linked form",
+      "numerator": 8,
+      "denominator": 11,
+      "value_pct": 72.7,
+      "calculation_method": "count ratio",
+      "data_source": "1,2",
+      "fully_measurable": true,
+      "limitations": ""
+    },
+    {
+      "metric": "Faculty form mismatch rate",
+      "definition": "Linked forms whose amount/contact/batch/timeline disagrees with invoice or reference",
+      "numerator": 2,
+      "denominator": 10,
+      "value_pct": 20.0,
+      "calculation_method": "count ratio",
+      "data_source": "1,2,ref",
+      "fully_measurable": true,
+      "limitations": "Small sample (n<20)"
+    },
+    {
+      "metric": "Duplicate invoice rate",
+      "definition": "Invoices colliding with another invoice (number, gateway id, student+class window)",
+      "numerator": 0,
+      "denominator": 13,
+      "value_pct": 0.0,
+      "calculation_method": "count ratio",
+      "data_source": "1_invoices",
+      "fully_measurable": true,
+      "limitations": "None observed in this sample"
+    },
+    {
+      "metric": "Duplicate faculty form rate",
+      "definition": "Invoices with >1 active form",
+      "numerator": 1,
+      "denominator": 13,
+      "value_pct": 7.7,
+      "calculation_method": "count ratio",
+      "data_source": "2_faculty_form",
+      "fully_measurable": true,
+      "limitations": "1 extra form row(s)"
+    },
+    {
+      "metric": "Faculty forms with an unknown invoice id",
+      "definition": "Forms citing a non-existent invoice",
+      "numerator": 1,
+      "denominator": 12,
+      "value_pct": 8.3,
+      "calculation_method": "count ratio",
+      "data_source": "1,2",
+      "fully_measurable": true,
+      "limitations": ""
+    },
+    {
+      "metric": "Booking request creation rate (approved forms)",
+      "definition": "Approved forms that have a booking request",
+      "numerator": 4,
+      "denominator": 4,
+      "value_pct": 100.0,
+      "calculation_method": "count ratio",
+      "data_source": "2,3",
+      "fully_measurable": true,
+      "limitations": ""
+    },
+    {
+      "metric": "Booking requests with no schedule rows",
+      "definition": "Booking requests without any non-cancelled schedule booking",
+      "numerator": 3,
+      "denominator": 4,
+      "value_pct": 75.0,
+      "calculation_method": "count ratio",
+      "data_source": "3,4",
+      "fully_measurable": true,
+      "limitations": "5501 has 2 schedule rows for 24 sessions: partial scheduling cannot be judged without policy"
+    },
+    {
+      "metric": "Student identity mismatch rate",
+      "definition": "Invoices raising STUDENT_ID_MISMATCH",
+      "numerator": 0,
+      "denominator": 13,
+      "value_pct": 0.0,
+      "calculation_method": "count ratio",
+      "data_source": "1,2,ref",
+      "fully_measurable": true,
+      "limitations": "None observed; names are masked so only ids are comparable"
+    },
+    {
+      "metric": "Payment amount mismatch rate",
+      "definition": "Invoices raising AMOUNT_MISMATCH or DISCOUNT_REQUIRES_APPROVAL",
+      "numerator": 2,
+      "denominator": 13,
+      "value_pct": 15.4,
+      "calculation_method": "count ratio",
+      "data_source": "1,2,ref",
+      "fully_measurable": true,
+      "limitations": ""
+    },
+    {
+      "metric": "Batch capacity issues",
+      "definition": "Invoices raising BATCH_FULL",
+      "numerator": 0,
+      "denominator": 13,
+      "value_pct": 0.0,
+      "calculation_method": "count ratio",
+      "data_source": "ref, 3",
+      "fully_measurable": true,
+      "limitations": "Reference counts may or may not include the renewing student (assumption A1)"
+    },
+    {
+      "metric": "Auto-approval eligibility rate",
+      "definition": "Invoices decided AUTO_APPROVE (no booking existed yet)",
+      "numerator": 2,
+      "denominator": 13,
+      "value_pct": 15.4,
+      "calculation_method": "count ratio",
+      "data_source": "all",
+      "fully_measurable": true,
+      "limitations": "Conservative: partial/duplicate/contact/batch-change cases are held"
+    },
+    {
+      "metric": "Safe-to-schedule rate",
+      "definition": "AUTO_APPROVE + AWAITING_SCHEDULING + ALREADY_PROCESSED",
+      "numerator": 4,
+      "denominator": 13,
+      "value_pct": 30.8,
+      "calculation_method": "count ratio",
+      "data_source": "all",
+      "fully_measurable": true,
+      "limitations": ""
+    },
+    {
+      "metric": "Exception rate",
+      "definition": "Invoices decided EXCEPTION",
+      "numerator": 9,
+      "denominator": 13,
+      "value_pct": 69.2,
+      "calculation_method": "count ratio",
+      "data_source": "all",
+      "fully_measurable": true,
+      "limitations": "Plus 1 form-level exception (orphan form 3313)"
+    }
+  ],
+  "timing": {
+    "payment_to_form_created_hours": {
+      "n": 10,
+      "median_h": 0.45,
+      "mean_h": 0.49,
+      "max_h": 0.83
+    },
+    "payment_to_form_negative_anomalies": 0,
+    "form_created_to_ops_approval_hours": {
+      "n": 4,
+      "median_h": 1.54,
+      "mean_h": 1.58,
+      "max_h": 2.5
+    },
+    "approval_to_booking_created_hours": {
+      "n": 4,
+      "median_h": 0.0,
+      "mean_h": 0.0,
+      "max_h": 0.0
+    },
+    "booking_created_to_first_schedule_hours": {
+      "n": 1,
+      "median_h": 0.5,
+      "mean_h": 0.5,
+      "max_h": 0.5
+    },
+    "note": "Single timezone assumed (not stated in data). Averages over n<=5 are indicative only, not a baseline."
+  },
+  "unscheduled_bookings": [
+    {
+      "booking_id": "5502",
+      "invoice_id": "84902",
+      "status": "Pending_Batch_Allocation",
+      "age_hours": 49.0
+    },
+    {
+      "booking_id": "5505",
+      "invoice_id": "84905",
+      "status": "Failed_Batch_Full",
+      "age_hours": 25.5
+    },
+    {
+      "booking_id": "5512",
+      "invoice_id": "84912",
+      "status": "Awaiting_Parent_Batch_Selection",
+      "age_hours": 0.75
+    }
+  ],
+  "estimated_effort_saved_sample": {
+    "assumptions": {
+      "manual_minutes_per_clean_renewal_verification": 10,
+      "source": "ASSUMPTION - validate with Ops Head (time study needed)"
+    },
+    "minutes": 20,
+    "label": "ILLUSTRATIVE ONLY - sample of 13 invoices"
+  },
+  "forms_approved_before_validation": [
+    "3305",
+    "3312"
+  ]
+}

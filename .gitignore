@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+.streamlit/
+.venv/
+# Official assessment assets: the official ops README restricts them to shortlisted candidates -> keep raw files out of git.
+data/raw/*.csv
+results/processing_state.json
+data/raw/OFFICIAL_OPS_README.md

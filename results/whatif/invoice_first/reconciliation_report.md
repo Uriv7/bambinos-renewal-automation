@@ -1,0 +1,24 @@
+# Reconciliation run report
+
+As-of: `2026-11-03 18:00:00`  |  invoices: 13
+
+| Decision | Count |
+|---|---|
+| AUTO_APPROVE | 5 |
+| AWAITING_SCHEDULING | 1 |
+| ALREADY_PROCESSED | 1 |
+| EXCEPTION | 6 |
+
+Form-level exceptions (orphan forms): 1
+
+## Exceptions
+
+| Case | Primary reason | All codes | Owner | Priority |
+|---|---|---|---|---|
+| CASE-84904 | PARENT_CONTACT_MISMATCH | PARENT_CONTACT_MISMATCH | Parent Success | P2 |
+| CASE-84905 | BATCH_FULL | BATCH_FULL | Scheduling Ops | P1 |
+| CASE-84907 | DISCOUNT_REQUIRES_APPROVAL | DISCOUNT_REQUIRES_APPROVAL | Ops Manager | P2 |
+| CASE-84909 | AMOUNT_MISMATCH | AMOUNT_MISMATCH|PARTIAL_PAYMENT | Finance Ops | P1 |
+| CASE-84911 | PAYMENT_NOT_VERIFIED | PAYMENT_NOT_VERIFIED | Finance Ops | P1 |
+| CASE-84912 | MISSING_REQUIRED_FIELD | MISSING_REQUIRED_FIELD|MANUAL_REVIEW_REQUIRED | Ops Executive | P2 |
+| CASE-FORM-3313 | INVOICE_NOT_FOUND | INVOICE_NOT_FOUND | Ops Executive | P2 |

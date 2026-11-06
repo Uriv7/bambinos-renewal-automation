@@ -1,0 +1,17 @@
+﻿metric,definition,numerator,denominator,value_pct,calculation_method,data_source,fully_measurable,limitations
+Paid invoices,Invoices with payment_status = Paid,11,13,84.6,count ratio,1_invoices,True,Status field taken at face value; no gateway ledger to cross-check
+Unpaid / not-fully-paid invoices,Invoices that are not Paid (Failed + Partially_Paid),2,13,15.4,count ratio,1_invoices,True,
+Orphaned paid invoices,Paid invoices with no faculty form linked by exact invoice id,3,11,27.3,count ratio,"1_invoices, 2_faculty_form",True,Includes 84913 whose form exists but cites a mistyped invoice id
+Faculty form submission rate (paid invoices),Paid invoices with an exact-id linked form,8,11,72.7,count ratio,"1,2",True,
+Faculty form mismatch rate,Linked forms whose amount/contact/batch/timeline disagrees with invoice or reference,2,10,20.0,count ratio,"1,2,ref",True,Small sample (n<20)
+Duplicate invoice rate,"Invoices colliding with another invoice (number, gateway id, student+class window)",0,13,0.0,count ratio,1_invoices,True,None observed in this sample
+Duplicate faculty form rate,Invoices with >1 active form,1,13,7.7,count ratio,2_faculty_form,True,1 extra form row(s)
+Faculty forms with an unknown invoice id,Forms citing a non-existent invoice,1,12,8.3,count ratio,"1,2",True,
+Booking request creation rate (approved forms),Approved forms that have a booking request,4,4,100.0,count ratio,"2,3",True,
+Booking requests with no schedule rows,Booking requests without any non-cancelled schedule booking,3,4,75.0,count ratio,"3,4",True,5501 has 2 schedule rows for 24 sessions: partial scheduling cannot be judged without policy
+Student identity mismatch rate,Invoices raising STUDENT_ID_MISMATCH,0,13,0.0,count ratio,"1,2,ref",True,None observed; names are masked so only ids are comparable
+Payment amount mismatch rate,Invoices raising AMOUNT_MISMATCH or DISCOUNT_REQUIRES_APPROVAL,2,13,15.4,count ratio,"1,2,ref",True,
+Batch capacity issues,Invoices raising BATCH_FULL,1,13,7.7,count ratio,"ref, 3",True,Reference counts may or may not include the renewing student (assumption A1)
+Auto-approval eligibility rate,Invoices decided AUTO_APPROVE (no booking existed yet),2,13,15.4,count ratio,all,True,Conservative: partial/duplicate/contact/batch-change cases are held
+Safe-to-schedule rate,AUTO_APPROVE + AWAITING_SCHEDULING + ALREADY_PROCESSED,4,13,30.8,count ratio,all,True,
+Exception rate,Invoices decided EXCEPTION,9,13,69.2,count ratio,all,True,Plus 1 form-level exception (orphan form 3313)

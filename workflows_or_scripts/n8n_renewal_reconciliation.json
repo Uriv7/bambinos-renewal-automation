@@ -1,0 +1,21 @@
+{
+  "name": "Bambinos renewal reconciliation (imports + executes in n8n 2.35.7 with manual trigger; notifications are placeholders)",
+  "nodes": [
+    {"parameters": {"rule": {"interval": [{"field": "minutes", "minutesInterval": 5}]}}, "name": "Every 5 minutes (target payment-to-reconcile SLA)", "type": "n8n-nodes-base.scheduleTrigger", "typeVersion": 1.2, "position": [0, 0]},
+    {"parameters": {"command": "cd /opt/bambinos-renewal-automation && python -m src.main --input data/raw --output results"}, "name": "Run reconciliation engine (idempotent)", "type": "n8n-nodes-base.executeCommand", "typeVersion": 1, "position": [260, 0]},
+    {"parameters": {"fileSelector": "/opt/bambinos-renewal-automation/results/flagged_exceptions.csv"}, "name": "Read flagged_exceptions.csv", "type": "n8n-nodes-base.readWriteFile", "typeVersion": 1, "position": [520, 0]},
+    {"parameters": {"operation": "csv"}, "name": "Parse CSV", "type": "n8n-nodes-base.extractFromFile", "typeVersion": 1, "position": [780, 0]},
+    {"parameters": {"conditions": {"string": [{"value1": "={{$json.priority}}", "value2": "P1"}]}}, "name": "P1 exception?", "type": "n8n-nodes-base.if", "typeVersion": 1, "position": [1040, 0]},
+    {"parameters": {}, "name": "PLACEHOLDER: page Finance/Scheduling Ops (Slack or WhatsApp) - NOT CONNECTED", "type": "n8n-nodes-base.noOp", "typeVersion": 1, "position": [1300, -80]},
+    {"parameters": {}, "name": "PLACEHOLDER: add to Ops queue sheet - NOT CONNECTED", "type": "n8n-nodes-base.noOp", "typeVersion": 1, "position": [1300, 100]}
+  ],
+  "connections": {
+    "Every 5 minutes (target payment-to-reconcile SLA)": {"main": [[{"node": "Run reconciliation engine (idempotent)", "type": "main", "index": 0}]]},
+    "Run reconciliation engine (idempotent)": {"main": [[{"node": "Read flagged_exceptions.csv", "type": "main", "index": 0}]]},
+    "Read flagged_exceptions.csv": {"main": [[{"node": "Parse CSV", "type": "main", "index": 0}]]},
+    "Parse CSV": {"main": [[{"node": "P1 exception?", "type": "main", "index": 0}]]},
+    "P1 exception?": {"main": [[{"node": "PLACEHOLDER: page Finance/Scheduling Ops (Slack or WhatsApp) - NOT CONNECTED", "type": "main", "index": 0}], [{"node": "PLACEHOLDER: add to Ops queue sheet - NOT CONNECTED", "type": "main", "index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"},
+  "meta": {"note": "Verified: imports and executes in n8n 2.35.7 via CLI when the schedule trigger is swapped for a manual trigger (workflows_or_scripts/check_n8n.py). NOT verified: the schedule trigger firing, the /opt path, any notification. Production version should start from a signed payment webhook and call the engine over HTTP, not a shell command."}
+}

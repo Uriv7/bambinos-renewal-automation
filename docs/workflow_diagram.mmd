@@ -1,0 +1,26 @@
+flowchart TD
+  A[Payment event - gateway webhook] --> B{Payment verified: Paid + gateway id + paid_at?}
+  B -- No --> X1[EXCEPTION: PAYMENT_NOT_VERIFIED / PARTIAL_PAYMENT -> Finance Ops]
+  B -- Yes --> C[Reconcile to invoice - exact id]
+  C --> D{Duplicate invoice?}
+  D -- Yes --> X2[EXCEPTION: DUPLICATE_INVOICE -> Finance Ops]
+  D -- No --> E[Student identity: student_id + user_id vs reference]
+  E --> F{Same-batch renewal?}
+  F -- Batch change --> X3[EXCEPTION: MANUAL_REVIEW -> Scheduling Ops + parent choice]
+  F -- Same batch --> G{Teacher form needed? optional}
+  G -- Form present --> H[Compare amount, teacher, course, contact]
+  G -- No form --> H2[Derive from invoice + reference]
+  H --> I
+  H2 --> I{All checks pass? amount = fee, contact matches, batch active, seat OK, no conflict}
+  I -- No --> X4[EXCEPTION queue -> owner by reason code]
+  I -- Yes --> J{Booking already exists?}
+  J -- Yes --> K[Continue from existing booking - never create another]
+  J -- No --> L[AUTO-APPROVE -> create booking once - idempotency key]
+  L --> M[Create schedule rows]
+  K --> M
+  M --> N[Parent WhatsApp confirmation]
+  X1 --> Q[Owner assignment -> follow-up -> human approval -> re-run reconciliation]
+  X2 --> Q
+  X3 --> Q
+  X4 --> Q
+  Q --> I

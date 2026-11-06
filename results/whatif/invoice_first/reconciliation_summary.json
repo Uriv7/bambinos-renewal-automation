@@ -1,0 +1,242 @@
+{
+  "as_of": "2026-11-03 18:00:00",
+  "records_processed": {
+    "invoices": 13,
+    "faculty_forms": 12,
+    "booking_requests": 4,
+    "schedule_rows": 2,
+    "reference_students": 13
+  },
+  "decisions": {
+    "AUTO_APPROVE": 5,
+    "AWAITING_SCHEDULING": 1,
+    "ALREADY_PROCESSED": 1,
+    "EXCEPTION": 6
+  },
+  "form_level_exceptions": 1,
+  "total_cases": 14,
+  "reason_code_distribution": {
+    "PARENT_CONTACT_MISMATCH": 1,
+    "BATCH_FULL": 1,
+    "DISCOUNT_REQUIRES_APPROVAL": 1,
+    "AMOUNT_MISMATCH": 1,
+    "PARTIAL_PAYMENT": 1,
+    "PAYMENT_NOT_VERIFIED": 1,
+    "MISSING_REQUIRED_FIELD": 1,
+    "MANUAL_REVIEW_REQUIRED": 1,
+    "INVOICE_NOT_FOUND": 1
+  },
+  "primary_reason_distribution": {
+    "PARENT_CONTACT_MISMATCH": 1,
+    "BATCH_FULL": 1,
+    "DISCOUNT_REQUIRES_APPROVAL": 1,
+    "AMOUNT_MISMATCH": 1,
+    "PAYMENT_NOT_VERIFIED": 1,
+    "MISSING_REQUIRED_FIELD": 1,
+    "INVOICE_NOT_FOUND": 1
+  },
+  "exceptions_by_owner": {
+    "Finance Ops": 2,
+    "Scheduling Ops": 1,
+    "Ops Executive": 2,
+    "Ops Manager": 1,
+    "Parent Success": 1
+  },
+  "engine_config": {
+    "as_of": null,
+    "standard_sessions": 24,
+    "session_minutes": 50,
+    "duplicate_invoice_window_days": 30,
+    "same_batch_seat_already_held": false,
+    "collapse_identical_duplicate_forms": true,
+    "teacher_reminder_hours": 2.0,
+    "teacher_escalation_hours": 12.0,
+    "scheduling_sla_hours": 4.0,
+    "payment_sla_minutes": 5.0
+  },
+  "input_fingerprints_sha256": {
+    "1_invoices.csv": "cf60e06517b934dbaf08d677c29b90c4415ece2871eb6f02e87624f76048daa3",
+    "2_faculty_form_unapproved.csv": "3421f1d4b26e8c5f5dcd3ae795abcdf4444030097fd77edbfbf8c3870ddd8770",
+    "3_booking_requests.csv": "1c89480f9963beeda590555d6f8ff887d3cb07d869593322ba413a806c4ab944",
+    "4_class_schedule_bookings.csv": "4b7eaabc1ff56440958254423c54e5fe002c9f955004ec0d5d8d151c610c5b84",
+    "reference_active_batches_and_students.csv": "327a47d7408b245fbf7f80cf3918860d828fecbf189f3d916c23489c55305cc9"
+  },
+  "kpis": [
+    {
+      "metric": "Paid invoices",
+      "definition": "Invoices with payment_status = Paid",
+      "numerator": 11,
+      "denominator": 13,
+      "value_pct": 84.6,
+      "calculation_method": "count ratio",
+      "data_source": "1_invoices",
+      "fully_measurable": true,
+      "limitations": "Status field taken at face value; no gateway ledger to cross-check"
+    },
+    {
+      "metric": "Unpaid / not-fully-paid invoices",
+      "definition": "Invoices that are not Paid (Failed + Partially_Paid)",
+      "numerator": 2,
+      "denominator": 13,
+      "value_pct": 15.4,
+      "calculation_method": "count ratio",
+      "data_source": "1_invoices",
+      "fully_measurable": true,
+      "limitations": ""
+    },
+    {
+      "metric": "Orphaned paid invoices",
+      "definition": "Paid invoices with no faculty form linked by exact invoice id",
+      "numerator": 3,
+      "denominator": 11,
+      "value_pct": 27.3,
+      "calculation_method": "count ratio",
+      "data_source": "1_invoices, 2_faculty_form",
+      "fully_measurable": true,
+      "limitations": "Includes 84913 whose form exists but cites a mistyped invoice id"
+    },
+    {
+      "metric": "Faculty form submission rate (paid invoices)",
+      "definition": "Paid invoices with an exact-id linked form",
+      "numerator": 8,
+      "denominator": 11,
+      "value_pct": 72.7,
+      "calculation_method": "count ratio",
+      "data_source": "1,2",
+      "fully_measurable": true,
+      "limitations": ""
+    },
+    {
+      "metric": "Faculty form mismatch rate",
+      "definition": "Linked forms whose amount/contact/batch/timeline disagrees with invoice or reference",
+      "numerator": 2,
+      "denominator": 13,
+      "value_pct": 15.4,
+      "calculation_method": "count ratio",
+      "data_source": "1,2,ref",
+      "fully_measurable": true,
+      "limitations": "Small sample (n<20)"
+    },
+    {
+      "metric": "Duplicate invoice rate",
+      "definition": "Invoices colliding with another invoice (number, gateway id, student+class window)",
+      "numerator": 0,
+      "denominator": 13,
+      "value_pct": 0.0,
+      "calculation_method": "count ratio",
+      "data_source": "1_invoices",
+      "fully_measurable": true,
+      "limitations": "None observed in this sample"
+    },
+    {
+      "metric": "Duplicate faculty form rate",
+      "definition": "Invoices with >1 active form",
+      "numerator": 1,
+      "denominator": 13,
+      "value_pct": 7.7,
+      "calculation_method": "count ratio",
+      "data_source": "2_faculty_form",
+      "fully_measurable": true,
+      "limitations": "1 extra form row(s)"
+    },
+    {
+      "metric": "Faculty forms with an unknown invoice id",
+      "definition": "Forms citing a non-existent invoice",
+      "numerator": 1,
+      "denominator": 12,
+      "value_pct": 8.3,
+      "calculation_method": "count ratio",
+      "data_source": "1,2",
+      "fully_measurable": true,
+      "limitations": ""
+    },
+    {
+      "metric": "Booking request creation rate (approved forms)",
+      "definition": "Approved forms that have a booking request",
+      "numerator": 4,
+      "denominator": 4,
+      "value_pct": 100.0,
+      "calculation_method": "count ratio",
+      "data_source": "2,3",
+      "fully_measurable": true,
+      "limitations": ""
+    },
+    {
+      "metric": "Booking requests with no schedule rows",
+      "definition": "Booking requests without any non-cancelled schedule booking",
+      "numerator": 3,
+      "denominator": 4,
+      "value_pct": 75.0,
+      "calculation_method": "count ratio",
+      "data_source": "3,4",
+      "fully_measurable": true,
+      "limitations": "5501 has 2 schedule rows for 24 sessions: partial scheduling cannot be judged without policy"
+    },
+    {
+      "metric": "Student identity mismatch rate",
+      "definition": "Invoices raising STUDENT_ID_MISMATCH",
+      "numerator": 0,
+      "denominator": 13,
+      "value_pct": 0.0,
+      "calculation_method": "count ratio",
+      "data_source": "1,2,ref",
+      "fully_measurable": true,
+      "limitations": "None observed; names are masked so only ids are comparable"
+    },
+    {
+      "metric": "Payment amount mismatch rate",
+      "definition": "Invoices raising AMOUNT_MISMATCH or DISCOUNT_REQUIRES_APPROVAL",
+      "numerator": 2,
+      "denominator": 13,
+      "value_pct": 15.4,
+      "calculation_method": "count ratio",
+      "data_source": "1,2,ref",
+      "fully_measurable": true,
+      "limitations": ""
+    },
+    {
+      "metric": "Batch capacity issues",
+      "definition": "Invoices raising BATCH_FULL",
+      "numerator": 1,
+      "denominator": 13,
+      "value_pct": 7.7,
+      "calculation_method": "count ratio",
+      "data_source": "ref, 3",
+      "fully_measurable": true,
+      "limitations": "Reference counts may or may not include the renewing student (assumption A1)"
+    },
+    {
+      "metric": "Auto-approval eligibility rate",
+      "definition": "Invoices decided AUTO_APPROVE (no booking existed yet)",
+      "numerator": 5,
+      "denominator": 13,
+      "value_pct": 38.5,
+      "calculation_method": "count ratio",
+      "data_source": "all",
+      "fully_measurable": true,
+      "limitations": "Conservative: partial/duplicate/contact/batch-change cases are held"
+    },
+    {
+      "metric": "Safe-to-schedule rate",
+      "definition": "AUTO_APPROVE + AWAITING_SCHEDULING + ALREADY_PROCESSED",
+      "numerator": 7,
+      "denominator": 13,
+      "value_pct": 53.8,
+      "calculation_method": "count ratio",
+      "data_source": "all",
+      "fully_measurable": true,
+      "limitations": ""
+    },
+    {
+      "metric": "Exception rate",
+      "definition": "Invoices decided EXCEPTION",
+      "numerator": 6,
+      "denominator": 13,
+      "value_pct": 46.2,
+      "calculation_method": "count ratio",
+      "data_source": "all",
+      "fully_measurable": true,
+      "limitations": "Plus 1 form-level exception (orphan form 3313)"
+    }
+  ]
+}

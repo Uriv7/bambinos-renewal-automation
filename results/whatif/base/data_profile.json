@@ -1,0 +1,551 @@
+{
+  "tables": {
+    "invoices": {
+      "rows": 13,
+      "columns": 25,
+      "duplicate_primary_keys": 0,
+      "column_profile": {
+        "id": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "invoice_number": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "user_id": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "student_id": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "class_id": {
+          "nulls": 0,
+          "distinct": 11
+        },
+        "educator_id": {
+          "nulls": 0,
+          "distinct": 6
+        },
+        "parent_name": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "mobile": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "email": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "currency": {
+          "nulls": 0,
+          "distinct": 1,
+          "values": {
+            "INR": 13
+          }
+        },
+        "amount": {
+          "nulls": 0,
+          "distinct": 8
+        },
+        "discount_amount": {
+          "nulls": 0,
+          "distinct": 2
+        },
+        "net_amount": {
+          "nulls": 0,
+          "distinct": 9
+        },
+        "payment_type": {
+          "nulls": 0,
+          "distinct": 2,
+          "values": {
+            "Full": 12,
+            "Installment_1_of_2": 1
+          }
+        },
+        "payment_mode": {
+          "nulls": 0,
+          "distinct": 3
+        },
+        "payment_gateway": {
+          "nulls": 0,
+          "distinct": 2,
+          "values": {
+            "Razorpay": 11,
+            "Stripe": 2
+          }
+        },
+        "gateway_order_id": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "gateway_payment_id": {
+          "nulls": 1,
+          "distinct": 12
+        },
+        "invoice_link": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "payment_status": {
+          "nulls": 0,
+          "distinct": 3,
+          "values": {
+            "Paid": 11,
+            "Partially_Paid": 1,
+            "Failed": 1
+          }
+        },
+        "is_renewal": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "paid_at": {
+          "nulls": 1,
+          "distinct": 12,
+          "min": "2026-11-01 10:15:22",
+          "max": "2026-11-03 16:50:00"
+        },
+        "created_at": {
+          "nulls": 0,
+          "distinct": 13,
+          "min": "2026-11-01 10:12:00",
+          "max": "2026-11-03 16:45:00"
+        },
+        "updated_at": {
+          "nulls": 0,
+          "distinct": 13,
+          "min": "2026-11-01 10:15:22",
+          "max": "2026-11-03 16:50:00"
+        },
+        "deleted_at": {
+          "nulls": 13,
+          "distinct": 0
+        }
+      }
+    },
+    "forms": {
+      "rows": 12,
+      "columns": 23,
+      "duplicate_primary_keys": 0,
+      "column_profile": {
+        "id": {
+          "nulls": 0,
+          "distinct": 12
+        },
+        "educator_id": {
+          "nulls": 0,
+          "distinct": 6
+        },
+        "educator_name": {
+          "nulls": 0,
+          "distinct": 6
+        },
+        "user_id": {
+          "nulls": 0,
+          "distinct": 11
+        },
+        "student_id": {
+          "nulls": 0,
+          "distinct": 11
+        },
+        "student_name": {
+          "nulls": 0,
+          "distinct": 11
+        },
+        "parent_mobile": {
+          "nulls": 0,
+          "distinct": 11
+        },
+        "class_id": {
+          "nulls": 0,
+          "distinct": 9
+        },
+        "current_classbatch_id": {
+          "nulls": 0,
+          "distinct": 9
+        },
+        "invoice_id": {
+          "nulls": 0,
+          "distinct": 11
+        },
+        "invoice_link": {
+          "nulls": 0,
+          "distinct": 11
+        },
+        "amount_paid": {
+          "nulls": 0,
+          "distinct": 7
+        },
+        "sessions_purchased": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "continue_same_batch": {
+          "nulls": 0,
+          "distinct": 2,
+          "values": {
+            "Yes": 11,
+            "No": 1
+          }
+        },
+        "preferred_days": {
+          "nulls": 0,
+          "distinct": 6
+        },
+        "preferred_time_slot": {
+          "nulls": 0,
+          "distinct": 8
+        },
+        "remarks": {
+          "nulls": 0,
+          "distinct": 12
+        },
+        "approval_status": {
+          "nulls": 0,
+          "distinct": 2,
+          "values": {
+            "Pending": 8,
+            "Approved": 4
+          }
+        },
+        "approved_by": {
+          "nulls": 8,
+          "distinct": 3
+        },
+        "approved_at": {
+          "nulls": 8,
+          "distinct": 4,
+          "min": "2026-11-01 11:30:00",
+          "max": "2026-11-03 17:15:00"
+        },
+        "created_at": {
+          "nulls": 0,
+          "distinct": 12,
+          "min": "2026-11-01 10:45:00",
+          "max": "2026-11-03 17:10:00"
+        },
+        "updated_at": {
+          "nulls": 0,
+          "distinct": 12,
+          "min": "2026-11-01 11:30:00",
+          "max": "2026-11-03 17:15:00"
+        },
+        "deleted_at": {
+          "nulls": 12,
+          "distinct": 0
+        }
+      }
+    },
+    "bookings": {
+      "rows": 4,
+      "columns": 20,
+      "duplicate_primary_keys": 0,
+      "column_profile": {
+        "id": {
+          "nulls": 0,
+          "distinct": 4
+        },
+        "faculty_form_id": {
+          "nulls": 0,
+          "distinct": 4
+        },
+        "invoice_id": {
+          "nulls": 0,
+          "distinct": 4
+        },
+        "user_id": {
+          "nulls": 0,
+          "distinct": 4
+        },
+        "student_id": {
+          "nulls": 0,
+          "distinct": 4
+        },
+        "class_id": {
+          "nulls": 0,
+          "distinct": 4
+        },
+        "educator_id": {
+          "nulls": 0,
+          "distinct": 4
+        },
+        "classbatch_id": {
+          "nulls": 1,
+          "distinct": 3
+        },
+        "sessions_count": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "is_renewal": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "continue_same_batch": {
+          "nulls": 0,
+          "distinct": 2,
+          "values": {
+            "Yes": 3,
+            "No": 1
+          }
+        },
+        "preferred_days": {
+          "nulls": 0,
+          "distinct": 3
+        },
+        "preferred_time": {
+          "nulls": 0,
+          "distinct": 3
+        },
+        "request_status": {
+          "nulls": 0,
+          "distinct": 4,
+          "values": {
+            "Completed": 1,
+            "Pending_Batch_Allocation": 1,
+            "Failed_Batch_Full": 1,
+            "Awaiting_Parent_Batch_Selection": 1
+          }
+        },
+        "batch_allocated": {
+          "nulls": 0,
+          "distinct": 2
+        },
+        "allocated_by": {
+          "nulls": 3,
+          "distinct": 1
+        },
+        "allocated_at": {
+          "nulls": 3,
+          "distinct": 1,
+          "min": "2026-11-01 12:00:00",
+          "max": "2026-11-01 12:00:00"
+        },
+        "created_at": {
+          "nulls": 0,
+          "distinct": 4,
+          "min": "2026-11-01 11:30:00",
+          "max": "2026-11-03 17:15:00"
+        },
+        "updated_at": {
+          "nulls": 0,
+          "distinct": 4,
+          "min": "2026-11-01 12:00:00",
+          "max": "2026-11-03 17:15:00"
+        },
+        "deleted_at": {
+          "nulls": 4,
+          "distinct": 0
+        }
+      }
+    },
+    "schedule": {
+      "rows": 2,
+      "columns": 18,
+      "duplicate_primary_keys": 0,
+      "column_profile": {
+        "id": {
+          "nulls": 0,
+          "distinct": 2
+        },
+        "bookingrequest_id": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "invoice_id": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "classschedule_id": {
+          "nulls": 0,
+          "distinct": 2
+        },
+        "classbatch_id": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "class_id": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "user_id": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "student_id": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "educator_id": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "class_date": {
+          "nulls": 0,
+          "distinct": 2,
+          "min": "2026-11-03 00:00:00",
+          "max": "2026-11-05 00:00:00"
+        },
+        "start_time": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "end_time": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "booking_type": {
+          "nulls": 0,
+          "distinct": 1,
+          "values": {
+            "Regular_Renewal": 2
+          }
+        },
+        "is_cancelled": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "attended_class": {
+          "nulls": 0,
+          "distinct": 2
+        },
+        "created_at": {
+          "nulls": 0,
+          "distinct": 1,
+          "min": "2026-11-01 12:00:05",
+          "max": "2026-11-01 12:00:05"
+        },
+        "updated_at": {
+          "nulls": 0,
+          "distinct": 2,
+          "min": "2026-11-01 12:00:05",
+          "max": "2026-11-03 18:00:00"
+        },
+        "deleted_at": {
+          "nulls": 2,
+          "distinct": 0
+        }
+      }
+    },
+    "reference": {
+      "rows": 13,
+      "columns": 20,
+      "duplicate_primary_keys": 0,
+      "column_profile": {
+        "student_id": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "user_id": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "student_name_masked": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "parent_name_masked": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "registered_mobile_masked": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "registered_email_masked": {
+          "nulls": 0,
+          "distinct": 13
+        },
+        "current_classbatch_id": {
+          "nulls": 0,
+          "distinct": 11
+        },
+        "classbatch_name": {
+          "nulls": 0,
+          "distinct": 11
+        },
+        "class_id": {
+          "nulls": 0,
+          "distinct": 11
+        },
+        "class_name": {
+          "nulls": 0,
+          "distinct": 11
+        },
+        "category_id": {
+          "nulls": 0,
+          "distinct": 5
+        },
+        "category_name": {
+          "nulls": 0,
+          "distinct": 5
+        },
+        "educator_id": {
+          "nulls": 0,
+          "distinct": 6
+        },
+        "educator_name": {
+          "nulls": 0,
+          "distinct": 6
+        },
+        "standard_fee_24_sessions_inr": {
+          "nulls": 0,
+          "distinct": 8
+        },
+        "batch_days": {
+          "nulls": 0,
+          "distinct": 7
+        },
+        "batch_start_time": {
+          "nulls": 0,
+          "distinct": 9
+        },
+        "active_students_count": {
+          "nulls": 0,
+          "distinct": 4
+        },
+        "max_batch_size": {
+          "nulls": 0,
+          "distinct": 1
+        },
+        "deleted_at": {
+          "nulls": 13,
+          "distinct": 0
+        }
+      }
+    }
+  },
+  "referential_integrity": {
+    "forms_with_unknown_invoice": [
+      "84931"
+    ],
+    "bookings_with_unknown_invoice": [],
+    "bookings_with_unknown_form": [],
+    "schedule_with_unknown_booking": [],
+    "invoices_with_unknown_student": [],
+    "invoices_without_exact_form": [
+      "84906",
+      "84910",
+      "84913"
+    ],
+    "bookings_with_null_batch": [
+      "5512"
+    ],
+    "students_per_user_gt1": []
+  },
+  "input_fingerprints_sha256": {
+    "1_invoices.csv": "cf60e06517b934dbaf08d677c29b90c4415ece2871eb6f02e87624f76048daa3",
+    "2_faculty_form_unapproved.csv": "3421f1d4b26e8c5f5dcd3ae795abcdf4444030097fd77edbfbf8c3870ddd8770",
+    "3_booking_requests.csv": "1c89480f9963beeda590555d6f8ff887d3cb07d869593322ba413a806c4ab944",
+    "4_class_schedule_bookings.csv": "4b7eaabc1ff56440958254423c54e5fe002c9f955004ec0d5d8d151c610c5b84",
+    "reference_active_batches_and_students.csv": "327a47d7408b245fbf7f80cf3918860d828fecbf189f3d916c23489c55305cc9"
+  },
+  "soft_deleted_rows_excluded": [],
+  "time_coverage_note": "All timestamps are timezone-naive; a single timezone is assumed."
+}

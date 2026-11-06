@@ -1,0 +1,7 @@
+﻿case_id,invoice_id,student_id,educator_id,class_id,classbatch_id,sessions_to_schedule,batch_days,batch_start_time,faculty_form_id,booking_id,ready_type,next_action,waiting_hours_since_booking,sla_status,idempotency_key
+CASE-84902,84902,68102,1108,205,9202,24,"Mon,Wed",18:00:00,3302,5502,EXISTING_BOOKING_AWAITING_SCHEDULE,Create schedule for existing booking 5502 (do NOT create another booking),49.0,BREACHED,ddd7463cf2a6c9bb
+CASE-84903,84903,68103,1115,301,9203,24,"Wed,Fri",16:30:00,3303,,NEW_BOOKING,Create booking request then schedule,,NOT_STARTED,54ed0eb580e30187
+CASE-84906,84906,68106,1102,108,9206,24,"Sun,Tue",19:00:00,VIRTUAL-84906,,NEW_BOOKING,Create booking request then schedule,,NOT_STARTED,5c8f7805d78926a8
+CASE-84908,84908,68108,1115,302,9208,24,"Sat,Sun",09:30:00,3308,,NEW_BOOKING,Create booking request then schedule,,NOT_STARTED,d18b6e6a4d7eb2e6
+CASE-84910,84910,68110,1122,401,9210,24,"Wed,Fri",17:00:00,VIRTUAL-84910,,NEW_BOOKING,Create booking request then schedule,,NOT_STARTED,6d6a001bbdd81d23
+CASE-84913,84913,68113,1130,501,9213,24,"Tue,Thu",18:00:00,VIRTUAL-84913,,NEW_BOOKING,Create booking request then schedule,,NOT_STARTED,2e94f6ae413d6d5f
